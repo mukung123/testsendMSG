@@ -13,8 +13,46 @@
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
     <script>
+
+        function getDateTime() {
+            const date = new Date(Date.now())
+            return date.toLocaleString()
+        }
+
+        function getLocation() {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                let lat = position.coords.latitude
+                let lng = position.coords.longitude
+                localStorage.setItem("MYLOC", JSON.stringify({ "lat": lat, "lng": lng }))
+            })
+            const theloc = localStorage.getItem("MYLOC")
+            localStorage.removeItem("MYLOC")
+            return theloc
+        }
+
+
+        async function getIP() {
+            await fetch('https://api.ipify.org/?format=json')
+                .then(results => results.json())
+                .then(data => {
+                    ip = data.ip
+                    localStorage.setItem("MYIP", ip)
+                })
+
+            const theip = localStorage.getItem("MYIP")
+            localStorage.removeItem("MYIP")
+            return theip
+        }
+
+
+
         async function main() {
             await liff.init({ liffId: "1656995427-Pn34wo4q" })
+
+            const loc = getLocation()
+            const dates = getDateTime()
+            const ip = await getIP()
+
             await liff.sendMessages([{
                 "type": "flex",
                 "altText": "Flex Message",
