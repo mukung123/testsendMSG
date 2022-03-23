@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <p style="text-align: center;"><img src="https://cliply.co/wp-content/uploads/2021/02/392102850_EARTH_EMOJI_400px.gif" alt="aa"></p>
+    <!-- <p style="text-align: center;"><img src="https://cliply.co/wp-content/uploads/2021/02/392102850_EARTH_EMOJI_400px.gif" alt="aa"></p> -->
     <p style="text-align: center;"><b>โปรดรอสักครู่...</b></p>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
@@ -206,6 +206,12 @@
                     }
                 }
             }])
+            
+            await liff.sendMessages([{
+                "type":"text",
+                "text":"ลงทะเบียน"
+            }])
+            
             liff.closeWindow()
         }
         main()
