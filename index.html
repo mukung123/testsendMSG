@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+    <title>My LIFF app</title>
+    <link rel="stylesheet" href="css/style.css" media="all">
+</head>
+
+<body>
+    <!-- <script src="js/vconsole.min.js"></script> -->
+    <!-- <script>
+    var vConsole = new VConsole()
+    console.log("Hello World!")
+  </script> -->
+    <button id="btnMsg" onclick="sendMsg()">Send Message</button>
+
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        function createUniversalLink() {
+        }
+
+        async function shareMsg() {
+        }
+
+        function logOut() {
+        }
+
+        function closed() {
+        }
+
+        async function scanCode() {
+        }
+
+        function openWindow() {
+        }
+
+        async function getFriendship() {
+        }
+
+        async function sendMsg() {
+            const mydate = getDateTime()
+            const myLoc = getLocation()
+            const myIP = await getIP()
+            const profile = await liff.getProfile()
+
+            const my_json_locate = JSON.parse(myLoc)
+
+            const flexful = {
+                "type": "flex",
+                "altText": "Flex Message",
+                "contents": {
+                    "type": "bubble",
+                    "body": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "box",
+                                        "layout": "vertical",
+                                        "contents": [
+                                            {
+                                                "type": "image",
+                                                "size": "full",
+                                                "aspectMode": "cover",
+                                                "aspectRatio": "150:98",
+                                                "gravity": "center",
+                                                "url": `https://maps.googleapis.com/maps/api/staticmap?center=${my_json_locate.lat.toFixed(6)},${my_json_locate.lng.toFixed(6)}&zoom=15&size=400x400&markers=size:mid%7Ccolor:red%7C${my_json_locate.lat.toFixed(6)},${my_json_locate.lng.toFixed(6)}&key=AIzaSyDPp1vNSk7TBo9FP7i1QPiB4Qq5tmNtk84`
+                                            },
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "contents": []
+                                            }
+                                        ],
+                                        "action": {
+                                            "type": "uri",
+                                            "label": "action",
+                                            "uri": `https://www.google.com/maps/search/?api=1&query=${my_json_locate.lat.toFixed(6)}%2C${my_json_locate.lng.toFixed(6)}`
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "box",
+                                        "layout": "vertical",
+                                        "contents": [
+                                            {
+                                                "type": "image",
+                                                "url": profile.pictureUrl,
+                                                "aspectMode": "cover",
+                                                "size": "full"
+                                            }
+                                        ],
+                                        "cornerRadius": "100px",
+                                        "width": "72px",
+                                        "height": "72px"
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "vertical",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "contents": [
+                                                    {
+                                                        "type": "span",
+                                                        "text": "Date",
+                                                        "weight": "bold",
+                                                        "color": "#000000"
+                                                    },
+                                                    {
+                                                        "type": "span",
+                                                        "text": "     "
+                                                    },
+                                                    {
+                                                        "type": "span",
+                                                        "text": mydate
+                                                    }
+                                                ],
+                                                "size": "sm",
+                                                "wrap": true
+                                            },
+                                            {
+                                                "type": "text",
+                                                "contents": [
+                                                    {
+                                                        "type": "span",
+                                                        "text": "Lat",
+                                                        "weight": "bold",
+                                                        "color": "#000000"
+                                                    },
+                                                    {
+                                                        "type": "span",
+                                                        "text": "     "
+                                                    },
+                                                    {
+                                                        "type": "span",
+                                                        "text": my_json_locate.lat.toFixed(6)
+                                                    }
+                                                ],
+                                                "size": "sm",
+                                                "wrap": true
+                                            },
+                                            {
+                                                "type": "text",
+                                                "contents": [
+                                                    {
+                                                        "type": "span",
+                                                        "text": "Lng",
+                                                        "weight": "bold",
+                                                        "color": "#000000"
+                                                    },
+                                                    {
+                                                        "type": "span",
+                                                        "text": "     "
+                                                    },
+                                                    {
+                                                        "type": "span",
+                                                        "text": my_json_locate.lng.toFixed(6)
+                                                    }
+                                                ],
+                                                "size": "sm",
+                                                "wrap": true
+                                            },
+                                            {
+                                                "type": "box",
+                                                "layout": "baseline",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": "IP Adress : " + myIP,
+                                                        "size": "sm",
+                                                        "color": "#bcbcbc"
+                                                    }
+                                                ],
+                                                "spacing": "sm",
+                                                "margin": "md"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "spacing": "xl",
+                                "paddingAll": "20px"
+                            }
+                        ],
+                        "paddingAll": "0px"
+                    }
+                }
+            }
+            await liff.sendMessages([flexful])
+            liff.closeWindow()
+        }
+
+        function getContext() {
+            document.getElementById("type").append(liff.getContext().type)
+            document.getElementById("viewType").append(liff.getContext().viewType)
+            document.getElementById("utouId").append(liff.getContext().utouId)
+            document.getElementById("roomId").append(liff.getContext().roomId)
+            document.getElementById("groupId").append(liff.getContext().groupId)
+        }
+
+        async function getUserProfile() {
+            const profile = await liff.getProfile()
+            document.getElementById("pictureUrl").src = profile.pictureUrl
+            document.getElementById("userId").append(profile.userId)
+            document.getElementById("statusMessage").append(profile.statusMessage)
+            document.getElementById("displayName").append(profile.displayName)
+            document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+        }
+
+        function getEnvironment() {
+            document.getElementById("os").append(liff.getOS())
+            document.getElementById("language").append(liff.getLanguage())
+            document.getElementById("version").append(liff.getVersion())
+            document.getElementById("accessToken").append(liff.getAccessToken())
+            document.getElementById("isInClient").append(liff.isInClient())
+            if (liff.isInClient()) {
+                document.getElementById("btnLogOut").style.display = "none"
+            } else {
+                document.getElementById("btnMsg").style.display = "none"
+                document.getElementById("btnScanCode").style.display = "none"
+                document.getElementById("btnClose").style.display = "none"
+            }
+        }
+
+        // ----------------------------------------------------------------- //
+
+        function getDateTime() {
+            const date = new Date(Date.now())
+            return date.toLocaleString()
+        }
+
+        function getLocation() {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                let lat = position.coords.latitude
+                let lng = position.coords.longitude
+                localStorage.setItem("MYLOC", JSON.stringify({ "lat": lat, "lng": lng }))
+            })
+            const theloc = localStorage.getItem("MYLOC")
+            localStorage.removeItem("MYLOC")
+            return theloc
+        }
+
+
+        async function getIP() {
+            await fetch('https://api.ipify.org/?format=json')
+                .then(results => results.json())
+                .then(data => {
+                    ip = data.ip
+                    localStorage.setItem("MYIP", ip)
+                })
+
+            const theip = localStorage.getItem("MYIP")
+            localStorage.removeItem("MYIP")
+            return theip
+        }
+
+        // ----------------------------------------------------------------- //
+
+
+        async function main() {
+            await liff.init({ liffId: "1656995427-Pn34wo4q" })
+            getLocation()
+            await sendMsg()
+            // getFriendship()
+            // createUniversalLink()
+        }
+        main()
+    </script>
+</body>
+
+</html>
