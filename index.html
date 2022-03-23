@@ -47,7 +47,6 @@
 
 
         async function main() {
-            alert("ss")
             await liff.init({ liffId: "1656995427-Pn34wo4q" })
             const loc = getLocation()
             const dates = getDateTime()
@@ -79,7 +78,7 @@
                                                 "aspectMode": "cover",
                                                 "aspectRatio": "150:98",
                                                 "gravity": "center",
-                                                "url": "https://maps.googleapis.com/maps/api/staticmap?center=14.0808974,100.604058&zoom=15&size=400x400&markers=size:mid%7Ccolor:red%7C14.0808974,100.60405&maptype=hybrid&key=AIzaSyDPp1vNSk7TBo9FP7i1QPiB4Qq5tmNtk84"
+                                                "url": `https://maps.googleapis.com/maps/api/staticmap?center=${my_json_locate.lat.toFixed(6)},${my_json_locate.lng.toFixed(6)}&zoom=15&size=400x400&markers=size:mid%7Ccolor:red%7C${my_json_locate.lat.toFixed(6)},${my_json_locate.lng.toFixed(6)}&maptype=hybrid&key=AIzaSyDPp1vNSk7TBo9FP7i1QPiB4Qq5tmNtk84`
                                             },
                                             {
                                                 "type": "box",
@@ -90,7 +89,7 @@
                                         "action": {
                                             "type": "uri",
                                             "label": "action",
-                                            "uri": "https://www.google.com/maps/search/?api=1&query=14.0808974%2C100.604058"
+                                            "uri": `https://www.google.com/maps/search/?api=1&query=${my_json_locate.lat.toFixed(6)}%2C${my_json_locate.lng.toFixed(6)}`
                                         }
                                     }
                                 ]
@@ -105,7 +104,7 @@
                                         "contents": [
                                             {
                                                 "type": "image",
-                                                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip13.jpg",
+                                                "url": profile.pictureUrl,
                                                 "aspectMode": "cover",
                                                 "size": "full"
                                             }
@@ -133,7 +132,7 @@
                                                     },
                                                     {
                                                         "type": "span",
-                                                        "text": "23/3/2565 12:52"
+                                                        "text": mydate
                                                     }
                                                 ],
                                                 "size": "sm",
@@ -154,7 +153,7 @@
                                                     },
                                                     {
                                                         "type": "span",
-                                                        "text": "12.4401216"
+                                                        "text": my_json_locate.lat.toFixed(6)
                                                     }
                                                 ],
                                                 "size": "sm",
@@ -175,7 +174,7 @@
                                                     },
                                                     {
                                                         "type": "span",
-                                                        "text": "100.456"
+                                                        "text": my_json_locate.lng.toFixed(6)
                                                     }
                                                 ],
                                                 "size": "sm",
@@ -187,7 +186,7 @@
                                                 "contents": [
                                                     {
                                                         "type": "text",
-                                                        "text": "IP Adress : 1.460.12",
+                                                        "text": "IP Adress : " + ip,
                                                         "size": "sm",
                                                         "color": "#bcbcbc"
                                                     }
