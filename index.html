@@ -19,7 +19,7 @@
             return date.toLocaleString()
         }
 
-        function getLocation() {
+        async function getLocation() {
             navigator.geolocation.getCurrentPosition(function (position) {
                 let lat = position.coords.latitude
                 let lng = position.coords.longitude
@@ -48,7 +48,7 @@
 
         async function main() {
             await liff.init({ liffId: "1656995427-Pn34wo4q" })
-            const loc = getLocation()
+            const loc = await getLocation()
             const dates = getDateTime()
             const ip = await getIP()
             const profile = await liff.getProfile()
@@ -132,7 +132,7 @@
                                                     },
                                                     {
                                                         "type": "span",
-                                                        "text": mydate
+                                                        "text": dates
                                                     }
                                                 ],
                                                 "size": "sm",
