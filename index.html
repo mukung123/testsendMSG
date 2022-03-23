@@ -47,11 +47,14 @@
 
 
         async function main() {
+            alert("ss")
             await liff.init({ liffId: "1656995427-Pn34wo4q" })
-
             const loc = getLocation()
             const dates = getDateTime()
             const ip = await getIP()
+            const profile = await liff.getProfile()
+            const my_json_locate = JSON.parse(loc)
+
 
             await liff.sendMessages([{
                 "type": "flex",
