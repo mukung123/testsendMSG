@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEMO1</title>
+    <title>DEMOs1</title>
 </head>
 
 <body>
     <!-- <p style="text-align: center;"><img src="https://cliply.co/wp-content/uploads/2021/02/392102850_EARTH_EMOJI_400px.gif" alt="aa"></p> -->
-    <p style="text-align: center;"><b>โปรดรอสักครู่s...</b></p>
+    <p style="text-align: center;"><b>โปรดรอสักครู่นะครับ...</b></p>
+    <button onclick="sendMSG()">ลงทะเบียน</button>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
     <script>
@@ -45,16 +46,12 @@
             return theip
         }
 
-
-
-        async function main() {
-            await liff.init({ liffId: "1657002791-KpW47bGJ" })
+        async function sendMSG(){
             const loc = await getLocation()
             const dates = getDateTime()
             const ip = await getIP()
             const profile = await liff.getProfile()
             const my_json_locate = JSON.parse(loc)
-
 
             await liff.sendMessages([{
                 "type": "flex",
@@ -206,13 +203,14 @@
                     }
                 }
             }])
-            
-            // await liff.sendMessages([{
-            //     "type":"text",
-            //     "text":"ลงทะเบียน"
-            // }])
+
             
             liff.closeWindow()
+        }
+
+        async function main() {
+            await liff.init({ liffId: "1657002791-KpW47bGJ" })
+
         }
         main()
     </script>
